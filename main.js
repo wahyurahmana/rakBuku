@@ -105,3 +105,15 @@ function sudahToBelum(idSudahToBelum){
     belumDibaca("load");
     return db
 }
+
+function pencarianBuku(){
+    let stylInputSearch = document.getElementById("stylInputSearch").value
+    let pencarianBukuData = document.getElementById("pencarianBukuData")
+    let html = ""
+    for(let data in db){
+        if(stylInputSearch === db[data].judul || stylInputSearch === db[data].penulis || stylInputSearch === db[data].tahunTerbit){
+            html += `<tr> <th>Judul</th> <td>:</td> <td>${db[data].judul}</td> </tr> <tr> <th>Penulis</th> <td>:</td> <td>${db[data].penulis}</td> </tr> <tr> <th>Tahun Terbit</th> <td>:</td> <td>${db[data].tahunTerbit}</td> </tr>`;
+        }
+    }
+    pencarianBukuData.innerHTML = html
+}

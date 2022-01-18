@@ -91,11 +91,6 @@
     color: white;
 }
 
-.dataBelumDibaca{
-    text-align: left; 
-    border-bottom: 1px solid cornflowerblue"
-}
-
 @media screen and (max-width: 500px) {
     #right{
         width: 100%;

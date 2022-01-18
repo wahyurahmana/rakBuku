@@ -49,28 +49,14 @@
                 <h2>PENCARIAN</h2>
                 <form>
                     <label>Kata Kunci</label>
-                    <input type="text" id="stylInputSearch">
-                    <button>Cari Sekarang</button>
+                    <input type="text" id="stylInputSearch" autocomplete="off">
+                    <button type="button" onclick="pencarianBuku()">Cari Sekarang</button>
                 </form>
             </div>
             <div class="box">
                 <h2>HASIL PENCARIAN</h2>
-                <table style="text-align: left; border-bottom: 1px solid cornflowerblue">
-                    <tr>
-                        <th>Judul</th>
-                        <td>:</td>
-                        <td>Judul 1</td>
-                    </tr>
-                    <tr>
-                        <th>Penulis</th>
-                        <td>:</td>
-                        <td>Penulis 1</td>
-                    </tr>
-                    <tr>
-                        <th>Tahun Terbit</th>
-                        <td>:</td>
-                        <td>Tahun Terbit 1</td>
-                    </tr>
+                <table style="text-align: left;" id="pencarianBukuData">
+
                 </table>
             </div>
         </div>
