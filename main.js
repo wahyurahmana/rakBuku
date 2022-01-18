@@ -8,16 +8,16 @@ function inputBuku() {
     }
     let sudahDibaca = document.getElementById("checkboxStyle")
     baris[sudahDibaca.name] = sudahDibaca.checked
-
+    baris.idBook = Math.ceil(Math.random() * 999999999)
     db.push(baris)
     alert("Data Berhasil Ditambahkan!")
     data[0].value = ""
     data[1].value = ""
     data[2].value = ""
 
-    if(sudahDibaca.checked === true){
+    if (sudahDibaca.checked === true) {
         telahDibaca()
-    }else{
+    } else {
         belumDibaca()
     }
 
@@ -26,18 +26,60 @@ function inputBuku() {
     return db
 }
 
-function belumDibaca() {
+function belumDibaca(load) {
     let dataBelumDibaca = document.getElementById("dataBelumDibaca");
-    if(db[db.length-1].sudahDibaca === false){
-        let html =`<tr> <th>Judul</th> <td>:</td> <td>${db[db.length-1].judul}</td> </tr> <tr> <th>Penulis</th> <td>:</td> <td>${db[db.length-1].penulis}</td> </tr> <tr> <th>Tahun Terbit</th> <td>:</td> <td>${db[db.length-1].tahunTerbit}</td> </tr> <tr> <td><button style="font-size: 10px;">Tandai Sudah Dibaca</button></td> </tr>`;
-        dataBelumDibaca.innerHTML += html
+    if (load === undefined) {
+        if (db[db.length - 1].sudahDibaca === false) {
+            let html = `<tr> <th>Judul</th> <td>:</td> <td>${db[db.length-1].judul}</td> </tr> <tr> <th>Penulis</th> <td>:</td> <td>${db[db.length-1].penulis}</td> </tr> <tr> <th>Tahun Terbit</th> <td>:</td> <td>${db[db.length-1].tahunTerbit}</td> </tr> <tr> <td><button style="font-size: 10px;" onclick="">Tandai Sudah Dibaca</button></td> </tr> <tr> <td><button style="font-size: 10px; background-color:red;" onclick="delBelumDibaca(${db[db.length-1].idBook})">Hapus</button></td> </tr>`;
+            dataBelumDibaca.innerHTML += html
+        }
+    } else {
+        let temp = ""
+        for (let data in db) {
+            if (db[data].sudahDibaca === false) {
+                temp += `<tr> <th>Judul</th> <td>:</td> <td>${db[data].judul}</td> </tr> <tr> <th>Penulis</th> <td>:</td> <td>${db[data].penulis}</td> </tr> <tr> <th>Tahun Terbit</th> <td>:</td> <td>${db[data].tahunTerbit}</td> </tr> <tr> <td><button style="font-size: 10px;" onclick="">Tandai Sudah Dibaca</button></td> </tr> <tr> <td><button style="font-size: 10px; background-color:red;" onclick="delBelumDibaca(${db[data].idBook})">Hapus</button></td> </tr>`;
+            }
+        }
+        dataBelumDibaca.innerHTML = temp
     }
 }
 
-function telahDibaca() {
+function telahDibaca(load) {
     let dataSudahDibaca = document.getElementById("dataSudahDibaca");
-    if(db[db.length-1].sudahDibaca === true){
-        let html =`<tr> <th>Judul</th> <td>:</td> <td>${db[db.length-1].judul}</td> </tr> <tr> <th>Penulis</th> <td>:</td> <td>${db[db.length-1].penulis}</td> </tr> <tr> <th>Tahun Terbit</th> <td>:</td> <td>${db[db.length-1].tahunTerbit}</td> </tr> <tr> <td><button style="font-size: 10px;">Tandai Belum Dibaca</button></td> </tr>`;
-        dataSudahDibaca.innerHTML += html
+    if (load === undefined) {
+        if (db[db.length - 1].sudahDibaca === true) {
+            let html = `<tr> <th>Judul</th> <td>:</td> <td>${db[db.length-1].judul}</td> </tr> <tr> <th>Penulis</th> <td>:</td> <td>${db[db.length-1].penulis}</td> </tr> <tr> <th>Tahun Terbit</th> <td>:</td> <td>${db[db.length-1].tahunTerbit}</td> </tr> <tr> <td><button style="font-size: 10px;">Tandai Belum Dibaca</button></td> </tr><tr> <td><button style="font-size: 10px; background-color:red;" onclick="delSudahDibaca(${db[db.length-1].idBook})">Hapus</button></td> </tr>`;
+            dataSudahDibaca.innerHTML += html
+        }
+    } else {
+        let temp = ""
+        for (let data in db) {
+            if (db[data].sudahDibaca === true) {
+                temp += `<tr> <th>Judul</th> <td>:</td> <td>${db[data].judul}</td> </tr> <tr> <th>Penulis</th> <td>:</td> <td>${db[data].penulis}</td> </tr> <tr> <th>Tahun Terbit</th> <td>:</td> <td>${db[data].tahunTerbit}</td> </tr> <tr> <td><button style="font-size: 10px;" onclick="">Tandai Sudah Dibaca</button></td> </tr> <tr> <td><button style="font-size: 10px; background-color:red;" onclick="delBelumDibaca(${db[data].idBook})">Hapus</button></td> </tr>`;
+            }
+        }
+        dataSudahDibaca.innerHTML = temp
     }
+}
+
+function delBelumDibaca(iddelBelumDibaca) {
+    for (let i = 0; i < db.length; i++) {
+        if (db[i].idBook === iddelBelumDibaca) {
+            db.splice(i, 1)
+        }
+    }
+    alert("Data Dihapus!")
+    belumDibaca("load");
+    return db
+}
+
+function delSudahDibaca(iddelSudahDibaca) {
+    for (let i = 0; i < db.length; i++) {
+        if (db[i].idBook === iddelSudahDibaca) {
+            db.splice(i, 1)
+        }
+    }
+    alert("Data Dihapus!")
+    telahDibaca("load");
+    return db
 }
