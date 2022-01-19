@@ -84,6 +84,10 @@
     border-radius: 5px;
 }
 
+.result-cari{
+    display: none;
+}
+
 #footer{
     font-size: 1vw;
     text-align: center;
