@@ -4,8 +4,12 @@ function inputBuku() {
     let baris = {}
     let data = document.getElementsByClassName('stylInput')
     for (let i = 0; i < data.length; i++) {
+        if (data[i].value === " " || data[i].value === "") {
+            return alert("Data Tidak Boleh Kosong!")
+        }
         baris[data[i].name] = data[i].value
     }
+
     let sudahDibaca = document.getElementById("checkboxStyle")
     baris[sudahDibaca.name] = sudahDibaca.checked
     baris.idBook = Math.ceil(Math.random() * 999999999)
